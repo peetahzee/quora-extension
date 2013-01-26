@@ -1,0 +1,139 @@
+html, body {
+	width: 300px;
+	height: 400px;
+	font-family: "Helvetica Neue", arial, sans-serif;
+	margin: 0;
+	padding: 1px;
+	border-radius: 5px;
+	background: #eee;
+}
+
+#left {
+	width: 50px;
+	height: 100%;
+	float: left;
+	background: -webkit-gradient(linear, 0% 0%, 100% 0%, from(#2c2626) , to(#483a3a));
+	border-radius: 10px 0px 0px 5px;
+}
+
+#logo {
+	width: 50px;
+	height: 50px;
+	background: url('logo.jpg');
+	border-radius: 10px 0px 0px 0px;
+	border-bottom: 3px solid #e0e0e0;
+}
+
+#right {
+	width: 246px;
+	margin-right: 1px;
+	float: right;
+}
+
+#searchbar {
+	background: #ccc;
+	height: 50px;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 5px;
+}
+
+#searchbar input {
+	font-size: 15px;
+	border: 1px solid #a9a9a9;
+	box-sizing: border-box;
+	padding: 8px;
+	width: 100%;
+	font-family: "Helvetica Neue", arial, sans-serif;
+	outline: none;
+}
+
+#content {
+	margin-top: 3px;
+	height: 345px;
+	overflow-y: hidden;
+	color: #333;
+}
+
+#search_results ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;	
+}
+
+#search_results ul li {
+}
+
+#search_results ul li > a {
+	font-size: 13px;	
+	line-height: 18px;
+	padding: 3px 5px;
+	margin-bottom: 3px;
+	text-decoration:  none;
+	color: inherit;
+	display: block;
+	background: #fff;
+	border: 1px solid #ddd;
+	position: relative;
+	-webkit-transition: 0.1s background, 0.1s border;
+}
+
+#search_results ul li > a:hover, #search_results ul li > a.active {
+	background: #e0e8ef;
+	border: 1px solid #a1b4c7;
+}
+#search_results ul li:last-of-type > a {
+	margin-bottom: 0;
+}
+
+#search_results ul li > a div {
+	display: inline-block;
+}
+
+#search_results ul li > a div span.o.match {
+	font-weight: bold;
+}
+
+/* Don't need hint text like "Matched topic alias" */
+#search_results ul li > a div.text span.faded{
+	display: none;
+}
+
+#search_results ul li > a div span.faded.desc {
+	text-transform: uppercase;
+	color: #bbb;
+	font-size: 10px;
+}
+
+/* Add question button */
+#search_results ul li > a span.submit_button {
+	float: right;
+	display: inline-block;
+	font-size: 12px;
+	font-weight: bold;	
+}
+
+/* Quora likes to add margin to take care of alignment with pic. Ignore that */
+#search_results ul li > a > div > span > div {
+	margin-top: 0 !important;
+}
+
+#search_results ul li > a > div div.pic {
+	position: absolute;
+	right: 5px;
+}
+
+#search_results ul li.results-header {
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #407cb3;
+	padding-left: 5px;
+}
+
+a {
+	outline: none;
+}
+
+.clear {
+	clear: both;
+}
