@@ -1,6 +1,13 @@
 var currentSearch = "";
 $(document).ready(function() {
-	$("#searchbar input").focus();
+
+	// focus on searchbox. hack needed to get focus on popup page.
+	if (!document.hasFocus()) {
+		document.location.reload();
+	} else {
+		$("#searchbar input").focus();
+	}
+	
 	$("#searchbar input").keyup(function() {
 		if($(this).val() != "") {
 			$("#welcome").fadeOut(150, function(){

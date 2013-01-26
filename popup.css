@@ -13,14 +13,14 @@ html, body {
 	height: 100%;
 	float: left;
 	background: -webkit-gradient(linear, 0% 0%, 100% 0%, from(#2c2626) , to(#483a3a));
-	border-radius: 10px 0px 0px 5px;
+	border-radius: 5px 0px 0px 5px;
 }
 
 #logo {
 	width: 50px;
 	height: 50px;
 	background: url('logo.jpg');
-	border-radius: 10px 0px 0px 0px;
+	border-radius: 5px 0px 0px 0px;
 	border-bottom: 3px solid #e0e0e0;
 }
 
@@ -49,9 +49,10 @@ html, body {
 }
 
 #content {
+	padding-right: 5px;
 	margin-top: 3px;
 	height: 345px;
-	overflow-y: hidden;
+	overflow-y: scroll;
 	color: #333;
 }
 
