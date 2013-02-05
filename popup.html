@@ -4,12 +4,18 @@
     <title>Quome</title>
     <link rel="stylesheet" href="popup.css" />
     <script src="jquery.min.js"></script>
+    <script src="global.js"></script>
     <script src="popup.js"></script>
   </head>
   <body>
   	<div id="left">
 	  	<a href="http://quora.com"><div id="logo"></div></a>
-  		
+	  	
+	  	<ul>
+	  		<li id="inbox"></li>
+	  		<li id="notifs"></li>
+	  		<li id="new"></li>
+	  	</ul>
   	</div>
   	<div id="right">
   		<div id="searchbar">
@@ -17,88 +23,13 @@
   		</div>
   		<div id="content">
   		
-  			<div id="welcome">
-  			
+  			<div id="welcome" class="display">
 	  			<h1>Start seraching.</h1>
 	  			<p>Find amazing answers and questions, starting from the search bar above.</p>
   			</div>
   		
-  			<div id="search_results">
-  			
-  			<!--
-	  		<div class="results_frame new_results_frame" id="__w2_hzuQEYC_results_frame">
-	  			<ul id="__w2_hzuQEYC_results_list">
-	  			<li class="text" id="__w2_hzuQEYC_list_item_0">
-	  				<a class="result_item" href="/Bleh-Dj"><div class="row main_col">
-	  					<span class="col w6_5 match-info"><div class="text"><span class="o match">Bleh</span> Dj</div></span>
-	  					<span class="col w1 faded desc" style="white-space: nowrap; overflow: hidden;">Profile</span>
-	  				</div></a>
-	  			</li>
-	  			<li class="text" id="__w2_hzuQEYC_list_item_1">
-	  				<a class="result_item" href="/Blah-Bleh-1"><div class="row main_col">
-	  					<span class="col w6_5 match-info"><div class="text">Blah <span class="o match">Bleh</span></div></span>
-	  					<span class="col w1 faded desc" style="white-space: nowrap; overflow: hidden;">Profile</span>
-	  				</div></a>
-	  			</li>
-	  			<li class="text" id="__w2_hzuQEYC_list_item_2">
-	  				<a class="result_item" href="/Bleh-Mkbleg"><div class="row main_col">
-		  				<span class="col w6_5 match-info"><div class="text"><span class="o match">Bleh</span> Mkbleg</div></span>
-		  				<span class="col w1 faded desc" style="white-space: nowrap; overflow: hidden;">Profile</span>
-		  			</div></a>
-		  		</li>
-		  		<li class="text with_img" id="__w2_hzuQEYC_list_item_3">
-		  			<a class="result_item" href="/Alec-Bleher"><div class="row main_col">
-		  				<span class="col w6_5 match-info"><div style="margin-top: 5px"><div class="text">Alec <span class="o match">Bleh</span>er</div></div></span>
-		  				<span class="col w1 faded desc" style="white-space: nowrap; overflow: hidden;"><div class="pic"><img src="http://qph.is.quoracdn.net/main-thumb-8871991-25-Efrk72MHyZF0naie2Ed83lmG78svG4VA.jpeg" height="20" width="20"></div><div style="margin-top: 7px">Profile</div></span>
-		  			</div></a>
-		  		</li>
-		  		<li class="text" id="__w2_hzuQEYC_list_item_4">
-		  			<a class="result_item" href="/Ulrike-Bleh"><div class="row main_col">
-		  				<span class="col w6_5 match-info"><div class="text">Ulrike <span class="o match">Bleh</span></div></span>
-		  				<span class="col w1 faded desc" style="white-space: nowrap; overflow: hidden;">Profile</span>
-		  			</div></a>
-		  		</li>
-		  		<li class="text with_img" id="__w2_hzuQEYC_list_item_5">
-		  			<a class="result_item" href="/Burt-Bleh"><div class="row main_col">
-			  			<span class="col w6_5 match-info"><div style="margin-top: 5px"><div class="text">Burt <span class="o match">Bleh</span></div></div></span>
-			  			<span class="col w1 faded desc" style="white-space: nowrap; overflow: hidden;"><div class="pic"><img src="http://qph.is.quoracdn.net/main-thumb-8676264-25-CWQX0AhC4cE5HzaWGVo2aCRkURJQV7aD.jpeg" height="20" width="20"></div><div style="margin-top: 7px">Profile</div></span>
-		  			</div></a>
-		  		</li>
-		  		<li class="text" id="__w2_hzuQEYC_list_item_6">
-		  			<a class="result_item" href="/Bleh-Blah"><div class="row main_col">
-			  			<span class="col w6_5 match-info"><div class="text"><span class="o match">Bleh</span> Blah</div></span>
-			  			<span class="col w1 faded desc" style="white-space: nowrap; overflow: hidden;">Profile</span>
-		  			</div></a>
-		  		</li>
-		  		<li class="text with_img" id="__w2_hzuQEYC_list_item_7">
-		  			<a class="result_item" href="/Jan-Bleha"><div class="row main_col">
-			  			<span class="col w6_5 match-info"><div style="margin-top: 5px"><div class="text">Jan <span class="o match">Bleh</span>a</div></div></span>
-			  			<span class="col w1 faded desc" style="white-space: nowrap; overflow: hidden;"><div class="pic"><img src="http://qph.is.quoracdn.net/main-thumb-7562452-25-IfjeFTE0rPcUI8O2uIe1qFhw24zArZ53.jpeg" height="20" width="20"></div><div style="margin-top: 7px">Profile</div></span>
-			  		</div></a>
-			  	</li>
-			  	<li class="text" id="__w2_hzuQEYC_list_item_8">
-			  		<a class="result_item" href="/Bleh-Bluh"><div class="row main_col">
-				  		<span class="col w6_5 match-info"><div class="text"><span class="o match">Bleh</span> Bluh</div></span>
-				  		<span class="col w1 faded desc" style="white-space: nowrap; overflow: hidden;">Profile</span>
-			  		</div></a>
-			  	</li>
-			  	<li class="text with_img" id="__w2_hzuQEYC_list_item_9">
-			  		<a class="result_item" href="/Angi-Blehi"><div class="row main_col">
-			  			<span class="col w6_5 match-info"><div style="margin-top: 5px"><div class="text">Angi <span class="o match">Bleh</span>i</div></div></span>
-			  			<span class="col w1 faded desc" style="white-space: nowrap; overflow: hidden;"><div class="pic"><img src="http://qph.is.quoracdn.net/main-thumb-3238555-25-xDQlRxHhkgMkt0KXaAq1DqKhWxJWtWaz.jpeg" height="20" width="20"></div><div style="margin-top: 7px">Profile</div></span>
-			  		</div></a>
-			  	</li>
-			  	<li class="lightlink" id="__w2_hzuQEYC_list_item_10">
-			  		<a class="result_item" href="/search?q=bleh&amp;context_type=&amp;context_id=">Search: bleh</a>
-			  	</li>
-			  	<li class="addquestionitem" id="__w2_hzuQEYC_list_item_11">
-			  		<a class="result_item" href="#"><strong class="inline_label col">bleh</strong><span class="lil_action_button submit_button col">Add Question</span></a>
-			  	</li>
-			  	</ul>
-			</div>
-			-->
-			
-  			</div>
+  			<div id="search_results" class="display" style="display: none"></div>
+  			<div id="notifs_display" class="display" style="display: none"></div>
   		
   		</div>
   	</div>

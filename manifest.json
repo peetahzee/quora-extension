@@ -3,14 +3,17 @@
   "version": "0.1",
   "manifest_version": 2,
 
-  // Recommended
   "description": "A plain text description",
 
-  // Pick one (or none)
   "browser_action": {
   	"default_popup": "popup.html"
   },
+  "background": {
+    "scripts": ["jquery.min.js", "global.js", "background.js"]
+  },
   "permissions": [
-  	"http://www.quora.com/"
+    "cookies",
+  	"*://www.quora.com/",
+    "*://api.quora.com/"
   ]
 }

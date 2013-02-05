@@ -1,0 +1,3 @@
+var syncTimer;
+
+syncNotifsInbox(syncTimer);
