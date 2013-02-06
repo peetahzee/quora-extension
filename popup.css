@@ -171,8 +171,19 @@ html, body {
 #search_results ul li > a span.submit_button {
 	float: right;
 	display: inline-block;
-	font-size: 12px;
-	font-weight: bold;	
+	font-size: 11px;
+	line-height: 17px;
+	padding: 0px 10px;
+	border: 1px solid #8cb332;
+	border-bottom-color: #648517;
+	background: -webkit-linear-gradient(#c3dd82 0%, #AEC969 100%);
+	border-radius: 3px;
+	color: #648517;
+
+	-webkit-transition: 0.3s opacity;
+}
+#search_results ul li > a span.submit_button:hover {
+	opacity: 0.8;
 }
 
 /* Quora likes to add margin to take care of alignment with pic. Ignore that */

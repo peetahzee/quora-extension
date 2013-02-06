@@ -46,12 +46,15 @@ $(document).ready(function() {
 function search(query) {
 	$.get("http://www.quora.com/ajax/full_navigator_results?q=" + currentSearch + "&data=%7B%7D&___W2_parentId=&___W2_windowId=", {}, function(msg) {
 		$("#search_results").html(msg.html);
+		$(".addquestionitem .result_item").attr("href", "http://www.quora.com/question/add?q=" + query);
 		parseLinks();
+		
 	});
 }
 
 function parseLinks() {
-	$("a").click(function() {
+	$("a").unbindbind('.openNewTab');
+	$("a").bind('click.openNewTab', function() {
 		var url = $(this).attr("href");
 		if(url.substring(0,1) == "/") {
 			url = "http://quora.com" + url;
@@ -65,14 +68,16 @@ function parseLinks() {
 
 function parseNotifs() {
 	var notifs = JSON.parse(localStorage.getItem("notifs"));
+	var unseen_count = parseInt(notifs.unseen_count);
 	$("#notifs_display").html("<ul></ul>");
 	for(var i in notifs.unseen) {
 		var elemToAdd = $("<li>" + notifs.unseen[i].replace(/<a href="#">(\w\D*)<\/a>(\.|)/ig, "") + "</li>");
 		$("#notifs_display ul").append(elemToAdd);
 	}
+
 	$("#notifs_display ul").append("<li id=\"more_notifs_link\"><a href=\"http://quora.com/notifications\">"
-		+ (parseInt(notifs.unseen_count) - parseInt(notifs.unseen_aggregated_count))
-		+ " more notifications &gt;</a></li>");
+		+ (unseen_count > 5 ? (unseen_count - 5) + " more notifications" : "All notifications")
+		+ " &gt;</a></li>");
 
 	// update menu bar count
 	$("li#notifs").html("<span>" + notifs.unseen_count + "</span>");
@@ -88,7 +93,7 @@ function parseInbox() {
 		inboxPage.find("h1.heading span").html("+");
 		inboxPage.find(".timestamp_wrapper").after("<div class=\"clear\"></div>");
 		$("#inbox_display").html(inboxPage.html());
-		$("#inbox_display").append("<div id=\"inbox_link\"><a href=\"http://quora.com/inbox\">Go to your inbox &gt;</a></div>");
+		$("#inbox_display").append("<div id=\"inbox_link\"><a href=\"http://quora.com/inbox\">Go to your inbox &gt;</a></>");
 	});
 };
 
