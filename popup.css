@@ -190,6 +190,7 @@ html, body {
 	text-transform: uppercase;
 	color: #406ea2;
 	padding-left: 5px;
+	font-size: 13px;
 }
 #notifs_display ul {
 	list-style: none;
@@ -209,9 +210,78 @@ html, body {
 	font-weight: bold;
 }
 
+#inbox_display h1 {
+	font-weight: bold;
+	color: #406ea2;
+	font-size: 16px;
+	margin: 0;
+}
+
+#inbox_display h1 span {
+	display: inline-block;
+	float: right;
+	font-size: 12px;
+	line-height: 12px;
+	font-weight: normal;
+	width: 14px;
+	height: 14px;
+	margin-top: 2px;
+	border: 1px solid #8cb332;
+	border-bottom-color: #648517;
+	background: -webkit-linear-gradient(#c3dd82 0%, #AEC969 100%);
+	border-radius: 3px;
+	color: #648517;
+	font-weight: bold;
+	text-align: center;
+	cursor: pointer;
+	-webkit-transition: 0.3s opacity;
+}
+#inbox_display h1 span:hover {
+	opacity: 0.8;
+}
+#inbox_display .pagedlist_item, #inbox_display #inbox_link {
+	background: #fff;
+	border: 1px solid #ddd;
+	padding: 7px;
+	margin-top: 3px;
+	font-size: 13px;
+	padding: 5px;
+}
+#inbox_display #inbox_link {
+	font-weight: bold;
+	text-align: right;
+}
+#inbox_display .pagedlist_item div.pic {
+	width: 45px;
+	height: 100%;
+	float: left;
+	margin-right: 5px;
+}
+
+#inbox_display .pagedlist_item div.pic img {
+	width: 45px !important;
+	height: 45px !important;	
+}
+
+#inbox_display .pagedlist_item div.inbox_message_title a {
+	color: #000;
+}
+#inbox_display .pagedlist_item div.timestamp_wrapper {
+	float: right;
+	font-size: 10px;
+	color: #bbb;
+}
+
+.display {
+	padding: 3px;
+}
+
 .display p {
 	font-size: 13px;
 	margin-left: 10px;
+}
+.hidden {
+	display: none;
 }
 
 a {

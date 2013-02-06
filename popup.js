@@ -31,6 +31,12 @@ $(document).ready(function() {
 		});
 	});
 
+	$("li#inbox").click(function() {
+		$(".display").fadeOut(150).promise().done(function() {
+			$("#inbox_display").fadeIn(150);
+		});
+	});
+
 	parseNotifs();
 	parseInbox();
 	syncNotifsInbox();
@@ -75,7 +81,15 @@ function parseNotifs() {
 
 function parseInbox() {
 	var inbox = JSON.parse(localStorage.getItem("inbox"));
-	console.log(inbox);
+	$("li#inbox").html("<span>" + inbox.unread_count + "</span>");
+
+	$.get("http://www.quora.com/inbox", {}, function(data) {
+		var inboxPage = $(".main_col", $(data));
+		inboxPage.find("h1.heading span").html("+");
+		inboxPage.find(".timestamp_wrapper").after("<div class=\"clear\"></div>");
+		$("#inbox_display").html(inboxPage.html());
+		$("#inbox_display").append("<div id=\"inbox_link\"><a href=\"http://quora.com/inbox\">Go to your inbox &gt;</a></div>");
+	});
 };
 
 function handleStorageUpdate(e) {
