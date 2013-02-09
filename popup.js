@@ -48,12 +48,12 @@ function search(query) {
 		$("#search_results").html(msg.html);
 		$(".addquestionitem .result_item").attr("href", "http://www.quora.com/question/add?q=" + query);
 		parseLinks();
-		
+		parsePosts();
 	});
 }
 
 function parseLinks() {
-	$("a").unbindbind('.openNewTab');
+	$("a").unbind('.openNewTab');
 	$("a").bind('click.openNewTab', function() {
 		var url = $(this).attr("href");
 		if(url.substring(0,1) == "/") {
@@ -61,6 +61,32 @@ function parseLinks() {
 		}
 		chrome.tabs.create({
 			url: url
+		});
+		return false;
+	});
+}
+
+function parsePosts() {
+	$("#search_results a").unbind(".openNewTab");
+	$("#search_results a").bind('click.showPost', function() {
+		var url = "http://www.quora.com" + $(this).attr("href");
+
+		$("#post_display").html("<p class=\"loading_message\">Loading...</p>");
+		$(".display").fadeOut(150).promise().done(function() {
+			$("#post_display").fadeIn(150);
+		});
+		$.get(url, {}, function(data) {
+			var topicHeader = $(".topic_header", $(data));
+			var questionHeader = $(".question_text_edit_row", $(data));
+			var content = $(".main_col", $(data));
+
+			$(".loading_message").fadeOut(150, function() {
+				$("#post_display").append(topicHeader.html());
+				$("#post_display").append(questionHeader.html());
+				content.each(function () {
+					$("#post_display").append($(this).html());
+				});
+			});
 		});
 		return false;
 	});
