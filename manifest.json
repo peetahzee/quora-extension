@@ -13,6 +13,7 @@
   },
   "permissions": [
     "cookies",
+    "tabs",
   	"*://www.quora.com/",
     "*://api.quora.com/"
   ]
