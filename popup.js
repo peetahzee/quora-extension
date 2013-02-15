@@ -48,7 +48,6 @@ $(document).ready(function() {
 				var leftPos = w.width - 410;
 				var d=document,w=window,f='http://www.quora.com/board/bookmarklet',l=d.location,e=encodeURIComponent,p='?v=1&url='+e(url),u=f+p;try{if(!/^(.*\.)?quora[^.]*$/.test(l.host))throw(0);}catch(z){a=function(){if(!w.open(u,'_blank','toolbar=0,scrollbars=no,resizable=1,status=1,width=430,height=400,left='+leftPos))l.href=u;};if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else a();} 
 			});
-
 		})
 	});
 
@@ -78,9 +77,7 @@ function parseLinks(el) {
 		if(url.substring(0,1) == "/") {
 			url = "http://quora.com" + url;
 		}
-		chrome.tabs.create({
-			url: url
-		});
+		chrome.tabs.create({ url: url });
 		return false;
 	});
 }
@@ -90,6 +87,7 @@ function parsePosts() {
 	$("#search_results a").each(function() {
 		var resultType = $.trim($(this).find("span.desc div:not(.pic)").html() || $(this).find("span.desc").html());
 		if(resultType == "Profile" || resultType == "Blog") {
+			// don't try to display content in the pop up if it's a profile or blog
 			parseLinks($(this));
 		} else {
 			$(this).bind('click.showPost', function() {
@@ -100,6 +98,7 @@ function parsePosts() {
 					$("#post_display").fadeIn(150);
 				});
 				$.get(url, {}, function(data) {
+					$("#post_display").html("");
 					var topicHeader = $(".topic_header", $(data));
 					var questionHeader = $(".question_text_edit_row", $(data));
 					var content = $(".main_col", $(data));
@@ -119,7 +118,7 @@ function parsePosts() {
 							$("#post_display").append($(this).html());
 						});
 
-						$("#post_display").append("<div id=\"read_more_link\"><a href=\"" + url + "\"><b>Continue reading on Quora.com &gt;</b></a></div>");
+						$("#post_display").append("<div id=\"read_more_link\"><a href=\"" + url + "\"><b>Continue on Quora.com &gt;</b></a></div>");
 
 						$("#post_display").find("h1").wrap("<a href=\"" + url + "\" />");
 
@@ -137,6 +136,7 @@ function parseNotifs() {
 	var unseen_count = parseInt(notifs.unseen_count);
 	$("#notifs_display").html("<ul></ul>");
 	for(var i in notifs.unseen) {
+		// get rid of fake links in notifs
 		var elemToAdd = $("<li>" + notifs.unseen[i].replace(/<a href="#">(\w\D*)<\/a>(\.|)/ig, "") + "</li>");
 		$("#notifs_display ul").append(elemToAdd);
 	}

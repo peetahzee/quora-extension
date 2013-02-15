@@ -1,3 +1,7 @@
+/*
+ * Used only for embedding in quora.com/inbox so to respond to "compose new message" calls
+ */
+ 
 function getURLParameter(name) {
     return decodeURI(
         (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]

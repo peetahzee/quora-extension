@@ -9,6 +9,7 @@ function syncNotifsInbox(syncTimer) {
 
 			var notifsCount = parseInt(dataJson.notifs.unseen_count) + parseInt(dataJson.inbox.unread_count);
 			chrome.browserAction.setBadgeText({text: "" + notifsCount});
+			chrome.browserAction.setBadgeBackgroundColor({color: "#2678c4"})
 		});
 
 	if(syncTimer != undefined) {
