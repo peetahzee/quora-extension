@@ -156,10 +156,11 @@ function parseInbox() {
 
 	$.get("http://www.quora.com/inbox", {}, function(data) {
 		var inboxPage = $(".main_col", $(data));
-		inboxPage.find("h1.heading span").html("+");
+		inboxPage.find("h1.heading span").html("+").wrap("<a href=\"http://www.quora.com/inbox?chrome_new_message=1\" />");
 		inboxPage.find(".timestamp_wrapper").after("<div class=\"clear\"></div>");
 		$("#inbox_display").html(inboxPage.html());
 		$("#inbox_display").append("<div id=\"inbox_link\"><a href=\"http://quora.com/inbox\">Go to your inbox &gt;</a></>");
+		parseLinks();
 	});
 };
 

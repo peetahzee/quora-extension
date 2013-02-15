@@ -15,5 +15,12 @@
     "tabs",
   	"*://www.quora.com/",
     "*://api.quora.com/"
-  ]
+  ],
+  "content_scripts": [
+    {
+      "matches" : ["http://www.quora.com/inbox*"],
+      "js" : ["jquery.min.js", "inbox.js"]
+    }
+  ],
+  "web_accessible_resources": ["inbox_embed.js"]
 }
