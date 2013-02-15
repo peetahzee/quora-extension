@@ -38,15 +38,17 @@ $(document).ready(function() {
 	});
 
 	$("li#compose").click(function() {
-		chrome.tabs.getCurrent(function(tab) {
+		chrome.tabs.query({ active : true, currentWindow : true}, function(tabs) {
 			var url = "";
-			if(tab != undefined) {
-				url = tab.url;
+			if(tabs[0] != undefined) {
+				url = tabs[0].url;
 			}
-			$("#bookmarklet_display").append("<iframe src=\"http://www.quora.com/board/bookmarklet?v=1&url=" + url + "\" />");
-			$(".display").fadeOut(150).promise().done(function() {
-				$("#bookmarklet_display").fadeIn(150);
+
+			chrome.windows.getCurrent(null, function(w) {
+				var leftPos = w.width - 410;
+				var d=document,w=window,f='http://www.quora.com/board/bookmarklet',l=d.location,e=encodeURIComponent,p='?v=1&url='+e(url),u=f+p;try{if(!/^(.*\.)?quora[^.]*$/.test(l.host))throw(0);}catch(z){a=function(){if(!w.open(u,'_blank','toolbar=0,scrollbars=no,resizable=1,status=1,width=430,height=400,left='+leftPos))l.href=u;};if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else a();} 
 			});
+
 		})
 	});
 
@@ -103,18 +105,23 @@ function parsePosts() {
 					var content = $(".main_col", $(data));
 
 					var titleHtml = topicHeader.find("h1").parent().html();
-						titleHtml = titleHtml == undefined ? "" : "<a href=\"" + url + "\">" + titleHtml + "</a>";
-					var profilePic = topicHeader.find(".profile_photo_img").parent().html();
-						profilePic = profilePic == undefined ? "" : "<a href=\"" + url + "\">" + profilePic + "</a>";
+					// don't add link here like we do with profile pic. add with all other h1's.
+
+					var profilePic = topicHeader.find(".profile_photo_img");
+					profilePic = profilePic.wrap("<a href=\"" + url + "\" />").parent();
 
 					$(".loading_message").fadeOut(150, function() {
 						$("#post_display").append(titleHtml);
-						$("#post_display").append(profilePic);
+						$("#post_display").append(profilePic.parent().html());
 						$("#post_display").append("<div class=\"clear\"></div>");
 						$("#post_display").append(questionHeader.html());
 						content.each(function () {
 							$("#post_display").append($(this).html());
 						});
+
+						$("#post_display").append("<div id=\"read_more_link\"><a href=\"" + url + "\"><b>Continue reading on Quora.com &gt;</b></a></div>");
+
+						$("#post_display").find("h1").wrap("<a href=\"" + url + "\" />");
 
 						parseLinks();
 					});

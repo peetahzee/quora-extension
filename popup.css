@@ -250,7 +250,7 @@ html, body {
 #inbox_display h1 span:hover {
 	opacity: 0.8;
 }
-.pagedlist_item, #inbox_display #inbox_link, #post_display #answer_wiki {
+.pagedlist_item, #inbox_display #inbox_link, #post_display #answer_wiki, #post_display #read_more_link {
 	background: #fff;
 	border: 1px solid #ddd;
 	padding: 7px;

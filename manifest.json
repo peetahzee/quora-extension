@@ -12,7 +12,6 @@
     "scripts": ["jquery.min.js", "global.js", "background.js"]
   },
   "permissions": [
-    "cookies",
     "tabs",
   	"*://www.quora.com/",
     "*://api.quora.com/"
