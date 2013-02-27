@@ -98,7 +98,6 @@ function parsePosts() {
 					$("#post_display").fadeIn(150);
 				});
 				$.get(url, {}, function(data) {
-					$("#post_display").html("");
 					var topicHeader = $(".topic_header", $(data));
 					var questionHeader = $(".question_text_edit_row", $(data));
 					var content = $(".main_col", $(data));
@@ -110,6 +109,7 @@ function parsePosts() {
 					profilePic = profilePic.wrap("<a href=\"" + url + "\" />").parent();
 
 					$(".loading_message").fadeOut(150, function() {
+						$("#post_display").html("");
 						$("#post_display").append(titleHtml);
 						$("#post_display").append(profilePic.parent().html());
 						$("#post_display").append("<div class=\"clear\"></div>");
@@ -118,10 +118,13 @@ function parsePosts() {
 							$("#post_display").append($(this).html());
 						});
 
+						// get rid of related answers
+						$("#post_display").find(".related_answer_header").parent().css("display", "none");
+						$("#post_display").find(".related_answer_question_text").parent().css("display", "none");
+						$("#post_display").find(".blurred_answer").html("<a class=\"inpost_login_link\" href=\"https://www.quora.com/login\">Log in to read this answer</a>");
+
 						$("#post_display").append("<div id=\"read_more_link\"><a href=\"" + url + "\"><b>Continue on Quora.com &gt;</b></a></div>");
-
 						$("#post_display").find("h1").wrap("<a href=\"" + url + "\" />");
-
 						parseLinks();
 					});
 				});
@@ -132,36 +135,48 @@ function parsePosts() {
 }
 
 function parseNotifs() {
-	var notifs = JSON.parse(localStorage.getItem("notifs"));
-	var unseen_count = parseInt(notifs.unseen_count);
-	$("#notifs_display").html("<ul></ul>");
-	for(var i in notifs.unseen) {
-		// get rid of fake links in notifs
-		var elemToAdd = $("<li>" + notifs.unseen[i].replace(/<a href="#">(\w\D*)<\/a>(\.|)/ig, "") + "</li>");
-		$("#notifs_display ul").append(elemToAdd);
+	if(localStorage.getItem("isLoggedIn") == "true") {
+		var notifs = JSON.parse(localStorage.getItem("notifs"));
+		var unseen_count = parseInt(notifs.unseen_count);
+		$("#notifs_display").html("<ul></ul>");
+		for(var i in notifs.unseen) {
+			// get rid of fake links in notifs
+			var elemToAdd = $("<li>" + notifs.unseen[i].replace(/<a href="#">(\w\D*)<\/a>(\.|)/ig, "") + "</li>");
+			$("#notifs_display ul").append(elemToAdd);
+		}
+
+		$("#notifs_display ul").append("<li id=\"more_notifs_link\"><a href=\"http://quora.com/notifications\">"
+			+ (unseen_count > 5 ? (unseen_count - 5) + " more notifications" : "All notifications")
+			+ " &gt;</a></li>");
+
+		// update menu bar count
+		$("li#notifs").html("<span>" + notifs.unseen_count + "</span>");
+		parseLinks();
+	} else {
+		$("#notifs_display").html("<p>You must be logged in to view your notifications.</p>");
+		$("#notifs_display").append("<a href=\"http://quora.com/login\"><div id=\"more_notifs_link\">Login &gt;</div></a>");
+		parseLinks();
 	}
-
-	$("#notifs_display ul").append("<li id=\"more_notifs_link\"><a href=\"http://quora.com/notifications\">"
-		+ (unseen_count > 5 ? (unseen_count - 5) + " more notifications" : "All notifications")
-		+ " &gt;</a></li>");
-
-	// update menu bar count
-	$("li#notifs").html("<span>" + notifs.unseen_count + "</span>");
-	parseLinks();
 };
 
 function parseInbox() {
-	var inbox = JSON.parse(localStorage.getItem("inbox"));
-	$("li#inbox").html("<span>" + inbox.unread_count + "</span>");
+	if(localStorage.getItem("isLoggedIn") == "true") {
+		var inbox = JSON.parse(localStorage.getItem("inbox"));
+		$("li#inbox").html("<span>" + inbox.unread_count + "</span>");
 
-	$.get("http://www.quora.com/inbox", {}, function(data) {
-		var inboxPage = $(".main_col", $(data));
-		inboxPage.find("h1.heading span").html("+").wrap("<a href=\"http://www.quora.com/inbox?chrome_new_message=1\" />");
-		inboxPage.find(".timestamp_wrapper").after("<div class=\"clear\"></div>");
-		$("#inbox_display").html(inboxPage.html());
-		$("#inbox_display").append("<div id=\"inbox_link\"><a href=\"http://quora.com/inbox\">Go to your inbox &gt;</a></>");
+		$.get("http://www.quora.com/inbox", {}, function(data) {
+			var inboxPage = $(".main_col", $(data));
+			inboxPage.find("h1.heading span").html("+").wrap("<a href=\"http://www.quora.com/inbox?chrome_new_message=1\" />");
+			inboxPage.find(".timestamp_wrapper").after("<div class=\"clear\"></div>");
+			$("#inbox_display").html(inboxPage.html());
+			$("#inbox_display").append("<div id=\"inbox_link\"><a href=\"http://quora.com/inbox\">Go to your inbox &gt;</a></>");
+			parseLinks();
+		});
+	} else {
+		$("#inbox_display").html("<p>You must be logged in to view your inbox.</p>");
+		$("#inbox_display").append("<a href=\"http://quora.com/login\"><div id=\"inbox_link\">Login &gt;</div></a>");
 		parseLinks();
-	});
+	}
 };
 
 function handleStorageUpdate(e) {

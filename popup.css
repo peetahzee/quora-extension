@@ -216,9 +216,15 @@ html, body {
 	font-size: 13px;
 }
 
-#notifs_display ul li#more_notifs_link {
+#notifs_display #more_notifs_link {
 	text-align: right;
 	font-weight: bold;
+	background: #fff;
+	border: 1px solid #ddd;
+	padding: 7px;
+	margin-bottom: 3px;
+	font-size: 13px;
+	/* Repeat so that div#more_notifs_link gets these too */
 }
 
 #inbox_display h1 {
@@ -355,6 +361,15 @@ html, body {
 	color: #000;
 }
 
+#post_display .inpost_login_link {
+	background: #e0e8ef;
+	border: 1px solid #a1b4c7;
+	padding: 3px;
+	display: block;
+	margin-top: 5px;
+	text-align: center;
+}
+
 #post_display .edit,
 #post_display .hidden,
 #post_display .add_content_section, 
@@ -370,7 +385,9 @@ html, body {
 #post_display .topic_list_item,
 #post_display .question_details .inline_editor_create,
 #post_display .wiki_header_row .col.label,
-#post_display #answer_wiki .col.label {
+#post_display #answer_wiki .col.label,
+#post_display .related_answer_header, 
+#post_display .related_answer_question_text {
 	display: none;
 }
 

@@ -4,12 +4,18 @@ function syncNotifsInbox(syncTimer) {
 	$.ajax({url: "https://api.quora.com/api/logged_in_user?fields=notifs,inbox", dataType: "text"})
 		.done(function(data) { 
 			dataJson = JSON.parse(data.substring(9));
-			localStorage.setItem("notifs", JSON.stringify(dataJson.notifs));
-			localStorage.setItem("inbox", JSON.stringify(dataJson.inbox));
+			if(dataJson.notifs == null && dataJson.inbox == null) {
+				localStorage.setItem("isLoggedIn", "false");
+			} else {
+				localStorage.setItem("isLoggedIn", "true");
+				localStorage.setItem("notifs", JSON.stringify(dataJson.notifs));
+				localStorage.setItem("inbox", JSON.stringify(dataJson.inbox));
 
-			var notifsCount = parseInt(dataJson.notifs.unseen_count) + parseInt(dataJson.inbox.unread_count);
-			chrome.browserAction.setBadgeText({text: "" + notifsCount});
-			chrome.browserAction.setBadgeBackgroundColor({color: "#2678c4"})
+				var notifsCount = parseInt(dataJson.notifs.unseen_count) + parseInt(dataJson.inbox.unread_count);
+				chrome.browserAction.setBadgeText({text: "" + notifsCount});
+				chrome.browserAction.setBadgeBackgroundColor({color: "#2678c4"})
+			}
+			
 		});
 
 	if(syncTimer != undefined) {
